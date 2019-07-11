@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
+  <style>
+  div {
+	  padding-left: 10px;
+	  border: 1px solid #4CAF50;
+	}
+  </style>
+<body>
+<hr>
+<Center>
+<div id="app" style="width:350px;height:380px">
+<h1>POST Method!</h1>
+  <input type="text" ref="empid" autocomplete="off" placeholder="Enter Employee ID"  style="width:220px" class="form-control" required><br>
+  <input type="text" ref="empname" autocomplete="off" placeholder="Enter Employee Name"  style="width:220px" class="form-control" required><br>
+  <input type="text" ref="empdesignation" autocomplete="off" placeholder="Enter Employee Designation"  style="width:220px" class="form-control" required><Br>
+  <input type="text" ref="empsalary" autocomplete="off" placeholder="Enter Employee Salary"  style="width:220px"  class="form-control" required><br>
+  <button  type="button" style="width:220px" class="btn btn-danger" v-on:click="postapidata" >Save</button><br><br>
+  {{ recordstatus }}
+</div>
+</Center>
+<script>
+new Vue({
+  el: '#app',
+  data () {
+    return {
+      recordstatus: null
+    }
+  },
+  methods:{
+	postapidata: function (event) {
+	var ename=this.$refs.empname.value;
+	var empdesignation=this.$refs.empdesignation.value;
+	var empsalary=this.$refs.empsalary.value;
+	var empid=this.$refs.empid.value;
+		axios
+		  .post('http://localhost/API/',
+		  {
+			"empname": ename, 
+			"empdesignation": empdesignation,
+			"empsalary": empsalary,
+			"empid": empid
+		  })
+		  .then(response => (this.recordstatus = response.data))
+	}
+  }
+})
+</script>
+</body>
+</html>

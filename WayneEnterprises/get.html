@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
+  <style>
+  div {
+	  padding-left: 10px;
+	  border: 1px solid #4CAF50;
+	}
+  </style>
+<body>
+<hr>
+<Center>
+<div id="app" style="width:300px;height:350px">
+<h1>GET Method!</h1>
+<Br>
+<input ref="empid" placeholder="Enter Emp ID to View" class="form-control" style="width:180px">
+<br>
+<button  type="button" style="width:180px" class="btn btn-danger" v-on:click="getapidata" >View Details</button>
+<hr>
+<table width="100%">
+<tr>
+	<td><b>Name:</b></td><td>{{ name }}</td>
+</tr>
+<tr>
+	<td><b>Designation:</b></td><td>{{ designation }}</td>
+</tr>
+<tr>
+	<td><b>Salary:</b></td><td>{{ salary }}</td>
+</tr>
+</div>
+</center>
+<script>
+new Vue({
+  el: '#app',
+  data () {
+    return {
+      name: '-',
+	  designation: "-",
+	  salary: "-",
+    }
+  },
+  methods:{
+	getapidata: function (event) {
+		var emp_id=this.$refs.empid.value;
+		axios
+		  .get('http://localhost/API/?empid=' + emp_id)
+		  .then(response => (
+			this.name = response.data[0].empname,
+			this.designation = response.data[0].empdesignation,
+			this.salary = response.data[0].empsalary
+			))
+	}
+  }
+})
+</script>
+</body>
+</html>
