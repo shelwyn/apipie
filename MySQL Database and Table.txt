@@ -1,0 +1,9 @@
+CREATE DATABASE `wayne_enterprises` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+CREATE TABLE `employees` (
+  `empid` int(11) NOT NULL,
+  `empname` varchar(45) DEFAULT NULL,
+  `empdesignation` varchar(45) DEFAULT NULL,
+  `empsalary` int(11) DEFAULT NULL,
+  PRIMARY KEY (`empid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
